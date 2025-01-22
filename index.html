@@ -2454,6 +2454,30 @@
             propertyName: 'Kab_Kot'}));
         document.getElementsByClassName('search-button')[0].className +=
          ' fa fa-binoculars';
+	// Tambahkan tombol Home
+        L.easyButton('fa-home', function () {
+            map.setView([-6.860886777948867, 107.59197079809998], 17); // Set zoom dan titik tengah
+        }, 'Go to Home').addTo(map);
+        // Menambahkan arah utara di kiri bawah
+        const northControl = L.control({ position: 'bottomleft' });
+
+        northControl.onAdd = function (map) {
+        const div = L.DomUtil.create('div', 'north-control');
+        div.innerHTML = '<img src="css/images/utara.png" style="width: 50px; transform: rotate(0deg);" alt="pngtree.com/</a>">';
+        return div;
+        };
+        northControl.addTo(map);
+        // Buat peta inset menggunakan basemap yang sama atau berbeda
+        var miniMapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        });
+
+        // Tambahkan inset peta
+        var miniMap = new L.Control.MiniMap(miniMapLayer, {
+            toggleDisplay: true, // Tombol untuk menampilkan/menyembunyikan inset
+            minimized: true,    // Tampilkan inset dalam keadaan terbuka
+            position: 'bottomright' // Posisi inset peta
+        }).addTo(map);
         </script>
     </body>
 </html>
